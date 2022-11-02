@@ -1,15 +1,14 @@
+using app.canditates.api.IRepository;
+using app.canditates.api.Repository;
+using app.utility.microservice.Extenstions;
+using app.utility.microservice.IRepository;
+using app.utility.microservice.Models;
+using app.utility.microservice.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace app.canditates.api
 {
@@ -25,12 +24,20 @@ namespace app.canditates.api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "app.canditates.api", Version = "v1" });
-            });
+
+            //To Config Cross Origin Support
+            services.ConfigureCorsSetup("Candidate");
+
+            //To Config Swagger Globally
+            services.ConfigureSwaggerSetup("Candidate Application Programming Interface");
+
+            //To Utility Microservice Dependency
+            services.AddSingleton<MongoDatabaseConfiguration>(Configuration.GetSection("MongoDBConfiguration").Get<MongoDatabaseConfiguration>());
+            services.AddTransient<IMongoDataContext, MongoDataContext>();
+
+            //To Api Application Dependency
+            services.AddTransient<ICanditateAccountRepository, CanditateAccountRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,10 +46,14 @@ namespace app.canditates.api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "app.canditates.api v1"));
             }
+            app.UseSwagger();
 
+            //Swagger Setup Deployment And Local Setup
+            app.SwaggerDeplomentAndLocalSetup(env, "Candidate Backend Application Version - 1", "CandidateApp");
+
+            //
+            app.UseCors("Candidate");
             app.UseRouting();
 
             app.UseAuthorization();

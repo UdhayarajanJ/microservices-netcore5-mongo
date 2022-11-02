@@ -5,13 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <Folder Include="Models\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="IRepository\" />
-    <Folder Include="Repository\" />
+    <ProjectReference Include="..\app.utility.microservice\app.utility.microservice.csproj" />
   </ItemGroup>
 
 </Project>
