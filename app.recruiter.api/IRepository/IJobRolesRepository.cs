@@ -10,5 +10,6 @@ namespace app.recruiter.api.IRepository
     {
         public Task<long> AddJobRoles(JobRoles jobRoles);
         public Task<long> UpdateJobRoles(JobRoles jobRoles);
+        public Task<long> DeleteJobRoles(string roleId);
     }
 }

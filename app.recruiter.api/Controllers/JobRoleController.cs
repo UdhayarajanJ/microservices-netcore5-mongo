@@ -69,5 +69,29 @@ namespace app.recruiter.api.Controllers
             }
             return Ok(apiReponse);
         }
+        /// <summary>
+        /// To Softly Deleted Existing Job Roles Details In MongoDatabase [ NetCoreMicroservice ] Collection [ Coll_JobRoles ]
+        /// </summary>
+        /// <param name="roleId"></param>
+        /// <returns></returns>
+        [HttpDelete(nameof(DeleteJobRoles))]
+        public async Task<IActionResult> DeleteJobRoles([FromQuery] string roleId)
+        {
+            CommonApiReponse apiReponse = new CommonApiReponse();
+            long result = await _jobRolesRepository.DeleteJobRoles(roleId);
+            if (result > 0)
+            {
+                apiReponse.statusCode = (int)HttpStatusCode.OK;
+                apiReponse.statusMessage = "Role Details Deleted...";
+                apiReponse.responseData = result;
+            }
+            else
+            {
+                apiReponse.statusCode = (int)HttpStatusCode.NotFound;
+                apiReponse.statusMessage = "Role Details Not Deleted...";
+                apiReponse.responseData = null;
+            }
+            return Ok(apiReponse);
+        }
     }
 }

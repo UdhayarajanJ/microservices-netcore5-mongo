@@ -33,6 +33,20 @@ namespace app.recruiter.api.Repository
             throw new NotImplementedException();
         }
 
+        public async Task<long> DeleteJobRoles(string roleId)
+        {
+            IMongoDatabase mongoDatabase = await _mongoDataContext.MongoDatabaseConnection();
+            IMongoCollection<JobRoles> mongoCollection = mongoDatabase.GetCollection<JobRoles>("Coll_JobRoles");
+
+            var filter = Builders<JobRoles>.Filter.Eq(x => x.id, roleId) & Builders<JobRoles>.Filter.Eq(x => x.isDeleted, false);
+            var builder = Builders<JobRoles>.Update.Set(x => x.isDeleted, true).Set(x => x.lastUpdate, DateTime.Now);
+
+            var resultUpdate = await mongoCollection.UpdateOneAsync(filter, builder);
+            long result = resultUpdate.ModifiedCount > 0 ? 1 : 0;
+            return result;
+            throw new NotImplementedException();
+        }
+
         public async Task<long> UpdateJobRoles(JobRoles jobRoles)
         {
             IMongoDatabase mongoDatabase = await _mongoDataContext.MongoDatabaseConnection();
