@@ -5,13 +5,19 @@ VisualStudioVersion = 16.0.32228.343
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microservices", "Microservices", "{5DE3C941-1058-4DBB-BBEE-C516D3E6545B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "app.recruiter.api", "app.recruiter.api\app.recruiter.api.csproj", "{2A88AF07-325B-4943-AAED-EFC95029E643}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "app.recruiter.api", "app.recruiter.api\app.recruiter.api.csproj", "{2A88AF07-325B-4943-AAED-EFC95029E643}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "app.canditates.api", "app.canditates.api\app.canditates.api.csproj", "{FB86DCB5-61C6-41D3-AE7B-5B9855FC6A24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "app.canditates.api", "app.canditates.api\app.canditates.api.csproj", "{FB86DCB5-61C6-41D3-AE7B-5B9855FC6A24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "app.utility.microservice", "app.utility.microservice\app.utility.microservice.csproj", "{7E4DF250-9BAC-4881-8F51-09C8A22D14C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "app.utility.microservice", "app.utility.microservice\app.utility.microservice.csproj", "{7E4DF250-9BAC-4881-8F51-09C8A22D14C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "app.jobapi.gateway", "app.jobapi.gateway\app.jobapi.gateway.csproj", "{7E7DA598-DD4C-407A-A8DD-9D6B9ACDAB38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "app.jobapi.gateway", "app.jobapi.gateway\app.jobapi.gateway.csproj", "{7E7DA598-DD4C-407A-A8DD-9D6B9ACDAB38}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MicroserviceUnitTesting", "MicroserviceUnitTesting", "{F97B5671-58AF-49F8-B982-063AAFCD2AF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api.test.candidate", "api.test.candidate\api.test.candidate.csproj", "{C51F07F0-3FAE-492C-A9F8-5302BB189A78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api.test.recruiter", "api.test.recruiter\api.test.recruiter.csproj", "{C7B5F372-BF6B-4AC0-9833-0E31FD039A57}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +41,14 @@ Global
 		{7E7DA598-DD4C-407A-A8DD-9D6B9ACDAB38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E7DA598-DD4C-407A-A8DD-9D6B9ACDAB38}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E7DA598-DD4C-407A-A8DD-9D6B9ACDAB38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C51F07F0-3FAE-492C-A9F8-5302BB189A78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C51F07F0-3FAE-492C-A9F8-5302BB189A78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C51F07F0-3FAE-492C-A9F8-5302BB189A78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C51F07F0-3FAE-492C-A9F8-5302BB189A78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7B5F372-BF6B-4AC0-9833-0E31FD039A57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7B5F372-BF6B-4AC0-9833-0E31FD039A57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7B5F372-BF6B-4AC0-9833-0E31FD039A57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7B5F372-BF6B-4AC0-9833-0E31FD039A57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -43,6 +57,8 @@ Global
 		{2A88AF07-325B-4943-AAED-EFC95029E643} = {5DE3C941-1058-4DBB-BBEE-C516D3E6545B}
 		{FB86DCB5-61C6-41D3-AE7B-5B9855FC6A24} = {5DE3C941-1058-4DBB-BBEE-C516D3E6545B}
 		{7E4DF250-9BAC-4881-8F51-09C8A22D14C3} = {5DE3C941-1058-4DBB-BBEE-C516D3E6545B}
+		{C51F07F0-3FAE-492C-A9F8-5302BB189A78} = {F97B5671-58AF-49F8-B982-063AAFCD2AF9}
+		{C7B5F372-BF6B-4AC0-9833-0E31FD039A57} = {F97B5671-58AF-49F8-B982-063AAFCD2AF9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {44656BDF-4612-4972-B975-5D6E283C9551}
