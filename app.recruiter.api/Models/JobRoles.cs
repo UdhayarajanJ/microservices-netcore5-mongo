@@ -13,7 +13,7 @@ namespace app.recruiter.api.Models
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string documentObjectId { get; set; }
-        [BsonElement("role")]
+        [BsonElement("roleId")]
         public string id { get; set; }
         [BsonElement("roleName")]
         public string roleName { get; set; }

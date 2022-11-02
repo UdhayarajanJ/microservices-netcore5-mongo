@@ -39,6 +39,7 @@ namespace app.recruiter.api
 
             //To Api Application Dependency
             services.AddTransient<IJobRolesRepository, JobRolesRepository>();
+            services.AddTransient<IJobPostRepository, JobPostRepository>();
 
         }
 
