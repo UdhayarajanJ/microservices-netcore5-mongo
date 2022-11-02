@@ -141,5 +141,43 @@ namespace app.canditates.api.Controllers
             }
             return Ok(apiReponse);
         }
+        [HttpPost(nameof(AddCandidateInformation))]
+        public async Task<IActionResult> AddCandidateInformation([FromBody]CandidateAccount candidateAccount)
+        {
+            CommonApiReponse apiReponse = new CommonApiReponse();
+            long result = await _canditateAccountRepository.AddCandidateInformation(candidateAccount);
+            if (result > 0)
+            {
+                apiReponse.statusCode = (int)HttpStatusCode.OK;
+                apiReponse.statusMessage = "Candidate Details Saved...";
+                apiReponse.responseData = result;
+            }
+            else
+            {
+                apiReponse.statusCode = (int)HttpStatusCode.NotFound;
+                apiReponse.statusMessage = "Candidate Details Not Saved...";
+                apiReponse.responseData = null;
+            }
+            return Ok(apiReponse);
+        }
+        [HttpPut(nameof(UpdateCandidateInformation))]
+        public async Task<IActionResult> UpdateCandidateInformation([FromBody] CandidateAccount candidateAccount)
+        {
+            CommonApiReponse apiReponse = new CommonApiReponse();
+            long result = await _canditateAccountRepository.UpdateCandidateInformation(candidateAccount);
+            if (result > 0)
+            {
+                apiReponse.statusCode = (int)HttpStatusCode.OK;
+                apiReponse.statusMessage = "Candidate Details Updated...";
+                apiReponse.responseData = result;
+            }
+            else
+            {
+                apiReponse.statusCode = (int)HttpStatusCode.NotFound;
+                apiReponse.statusMessage = "Candidate Details Not Updated...";
+                apiReponse.responseData = null;
+            }
+            return Ok(apiReponse);
+        }
     }
 }

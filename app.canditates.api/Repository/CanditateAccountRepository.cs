@@ -25,8 +25,19 @@ namespace app.canditates.api.Repository
             _configuration = configuration;
         }
 
-        public Task<long> AddCandidateInformation(CandidateAccount candidateAccount)
+        public async Task<long> AddCandidateInformation(CandidateAccount candidateAccount)
         {
+            IMongoDatabase mongoDatabase = await _mongoDataContext.MongoDatabaseConnection();
+            IMongoCollection<CandidateAccount> mongoCollection = mongoDatabase.GetCollection<CandidateAccount>("Coll_CandidateInformation");
+
+            candidateAccount.createdDate = DateTime.Now;
+            candidateAccount.lastUpdate = DateTime.Now;
+            candidateAccount.isDeleted = false;
+
+            await mongoCollection.InsertOneAsync(candidateAccount);
+            long result = !string.IsNullOrEmpty(candidateAccount.documentObjectId.ToString()) ? 1 : 0;
+            return result;
+
             throw new NotImplementedException();
         }
 
@@ -75,8 +86,19 @@ namespace app.canditates.api.Repository
             throw new NotImplementedException();
         }
 
-        public Task<long> UpdateCandidateInformation(CandidateAccount candidateAccount)
+        public async Task<long> UpdateCandidateInformation(CandidateAccount candidateAccount)
         {
+            IMongoDatabase mongoDatabase = await _mongoDataContext.MongoDatabaseConnection();
+            IMongoCollection<CandidateAccount> mongoCollection = mongoDatabase.GetCollection<CandidateAccount>("Coll_CandidateInformation");
+
+            candidateAccount.lastUpdate = DateTime.Now;
+            candidateAccount.isDeleted = false;
+
+            var filter = Builders<CandidateAccount>.Filter.Eq(x => x.id, candidateAccount.id);
+
+            var resultUpdate = await mongoCollection.ReplaceOneAsync(filter, candidateAccount);
+            long result = resultUpdate.ModifiedCount > 0 ? 1 : 0;
+            return result;
             throw new NotImplementedException();
         }
 
