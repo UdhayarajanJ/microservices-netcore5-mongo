@@ -37,7 +37,7 @@ namespace app.canditates.api.Repository
         public async Task<long> DeleteCandidateLoginDetails(string candidateId)
         {
             IMongoDatabase mongoDatabase = await _mongoDataContext.MongoDatabaseConnection();
-            IMongoCollection<CandidateLoginDetails> mongoCollection = mongoDatabase.GetCollection<CandidateLoginDetails>("Coll_JobPost");
+            IMongoCollection<CandidateLoginDetails> mongoCollection = mongoDatabase.GetCollection<CandidateLoginDetails>("Coll_CandidateCredential");
 
             var filter = Builders<CandidateLoginDetails>.Filter.Eq(x => x.id, candidateId) & Builders<CandidateLoginDetails>.Filter.Eq(x => x.isDeleted, false);
             var builder = Builders<CandidateLoginDetails>.Update.Set(x => x.isDeleted, true).Set(x => x.lastUpdate, DateTime.Now);
@@ -51,10 +51,10 @@ namespace app.canditates.api.Repository
         public async Task<long> UpdateCandidateLoginDetails(CandidateLoginDetails candidateLoginDetails)
         {
             IMongoDatabase mongoDatabase = await _mongoDataContext.MongoDatabaseConnection();
-            IMongoCollection<CandidateLoginDetails> mongoCollection = mongoDatabase.GetCollection<CandidateLoginDetails>("Coll_JobPost");
+            IMongoCollection<CandidateLoginDetails> mongoCollection = mongoDatabase.GetCollection<CandidateLoginDetails>("Coll_CandidateCredential");
 
-            var filter = Builders<CandidateLoginDetails>.Filter.Eq(x => x.id, candidateLoginDetails.id) & Builders<CandidateLoginDetails>.Filter.Eq(x => x.isDeleted, false);
-            var builder = Builders<CandidateLoginDetails>.Update.Set(x => x.isDeleted, true).Set(x => x.lastUpdate, DateTime.Now).Set(x=>x.userPassword,candidateLoginDetails.userPassword);
+            var filter = Builders<CandidateLoginDetails>.Filter.Eq(x => x.userEmail, candidateLoginDetails.userEmail) & Builders<CandidateLoginDetails>.Filter.Eq(x => x.isDeleted, false);
+            var builder = Builders<CandidateLoginDetails>.Update.Set(x => x.lastUpdate, DateTime.Now).Set(x=>x.userPassword,candidateLoginDetails.userPassword);
 
             var resultUpdate = await mongoCollection.UpdateOneAsync(filter, builder);
             long result = resultUpdate.ModifiedCount > 0 ? 1 : 0;
