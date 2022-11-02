@@ -91,7 +91,6 @@ namespace app.canditates.api.Controllers
                 apiReponse.responseData = null;
             }
             return Ok(apiReponse);
-
         }
         /// <summary>
         /// To Upload The File Information Of Candidates Required Documents
@@ -114,6 +113,30 @@ namespace app.canditates.api.Controllers
             {
                 apiReponse.statusCode = (int)HttpStatusCode.NotFound;
                 apiReponse.statusMessage = "File Upload Failed...";
+                apiReponse.responseData = null;
+            }
+            return Ok(apiReponse);
+        }
+        /// <summary>
+        /// To Check The Candidate Login Details In MongoDatabase [ NetCoreMicroservice ] Collection [ Coll_CandidateCredential ]
+        /// </summary>
+        /// <param name="loginCandidate"></param>
+        /// <returns></returns>
+        [HttpPost(nameof(CheckCandidateLoginDetails))]
+        public async Task<IActionResult> CheckCandidateLoginDetails([FromBody] LoginCandidate loginCandidate)
+        {
+            CommonApiReponse apiReponse = new CommonApiReponse();
+            LoginResponse result = await _canditateAccountRepository.CheckCandidateLoginDetails(loginCandidate);
+            if (result !=null && !string.IsNullOrEmpty(result.userId))
+            {
+                apiReponse.statusCode = (int)HttpStatusCode.OK;
+                apiReponse.statusMessage = "Login Details Found...";
+                apiReponse.responseData = result;
+            }
+            else
+            {
+                apiReponse.statusCode = (int)HttpStatusCode.NotFound;
+                apiReponse.statusMessage = "Login Details Not Found...";
                 apiReponse.responseData = null;
             }
             return Ok(apiReponse);

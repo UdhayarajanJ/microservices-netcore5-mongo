@@ -93,5 +93,25 @@ namespace app.canditates.api.Repository
             return result;
             throw new NotImplementedException();
         }
+
+        public async Task<LoginResponse> CheckCandidateLoginDetails(LoginCandidate loginCandidate)
+        {
+            IMongoDatabase mongoDatabase = await _mongoDataContext.MongoDatabaseConnection();
+            IMongoCollection<CandidateLoginDetails> mongoCollection = mongoDatabase.GetCollection<CandidateLoginDetails>("Coll_CandidateCredential");
+
+            LoginResponse userLoginResponse = (from userDetails in mongoCollection.AsQueryable()
+                                      where
+                                      userDetails.isDeleted == false &&
+                                      userDetails.userEmail == loginCandidate.userEmail &&
+                                      userDetails.userPassword == loginCandidate.password
+                                      select new LoginResponse()
+                                      {
+                                          userEmailId = userDetails.userEmail,
+                                          userId = userDetails.id
+
+                                      }).FirstOrDefault();
+            return userLoginResponse;
+            throw new NotImplementedException();
+        }
     }
 }

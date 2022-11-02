@@ -84,4 +84,15 @@ namespace app.canditates.api.Models
         [BsonElement("userPassword")]
         public string userPassword { get; set; }
     }
+    public class LoginCandidate
+    {
+        public string userEmail { get; set; }
+        public string password { get; set; }
+    }
+    public class LoginResponse
+    {
+        public string userId { get; set; }
+        public string userTypeId { get; set; }
+        public string userEmailId { get; set; }
+    }
 }

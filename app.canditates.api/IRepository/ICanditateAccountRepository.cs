@@ -13,6 +13,7 @@ namespace app.canditates.api.IRepository
         public Task<long> AddCandidateLoginDetails(CandidateLoginDetails candidateLoginDetails);
         public Task<long> UpdateCandidateLoginDetails(CandidateLoginDetails candidateLoginDetails);
         public Task<long> DeleteCandidateLoginDetails(string candidateId);
+        public Task<LoginResponse> CheckCandidateLoginDetails(LoginCandidate loginCandidate);
 
         //----//
 
