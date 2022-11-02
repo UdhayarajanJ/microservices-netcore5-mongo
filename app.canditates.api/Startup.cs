@@ -35,6 +35,7 @@ namespace app.canditates.api
             //To Utility Microservice Dependency
             services.AddSingleton<MongoDatabaseConfiguration>(Configuration.GetSection("MongoDBConfiguration").Get<MongoDatabaseConfiguration>());
             services.AddTransient<IMongoDataContext, MongoDataContext>();
+            services.AddTransient<IDocumentsUploadRepository, DocumentsUploadRepository>();
 
             //To Api Application Dependency
             services.AddTransient<ICanditateAccountRepository, CanditateAccountRepository>();

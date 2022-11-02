@@ -93,5 +93,30 @@ namespace app.canditates.api.Controllers
             return Ok(apiReponse);
 
         }
+        /// <summary>
+        /// To Upload The File Information Of Candidates Required Documents
+        /// </summary>
+        /// <param name="formFile"></param>
+        /// <param name="documentSuffixPath"></param>
+        /// <returns></returns>
+        [HttpPost(nameof(UploadCandidateFileInformation))]
+        public async Task<IActionResult> UploadCandidateFileInformation([FromForm] IFormFile formFile, [FromForm] string documentSuffixPath)
+        {
+            CommonApiReponse apiReponse = new CommonApiReponse();
+            DocumentResponse result = await _canditateAccountRepository.UploadCandidateFileInformation(formFile, documentSuffixPath);
+            if (result != null)
+            {
+                apiReponse.statusCode = (int)HttpStatusCode.OK;
+                apiReponse.statusMessage = "File Upload Successfully...";
+                apiReponse.responseData = result;
+            }
+            else
+            {
+                apiReponse.statusCode = (int)HttpStatusCode.NotFound;
+                apiReponse.statusMessage = "File Upload Failed...";
+                apiReponse.responseData = null;
+            }
+            return Ok(apiReponse);
+        }
     }
 }
