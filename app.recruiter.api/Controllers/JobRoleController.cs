@@ -93,5 +93,28 @@ namespace app.recruiter.api.Controllers
             }
             return Ok(apiReponse);
         }
+        /// <summary>
+        /// To Get Roles Details Purpose Of Post A Job For Recruiter MongoDatabase [ NetCoreMicroservice ] Collection [ Coll_JobRoles ]
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet(nameof(GetRolesDetailsForDropdown))]
+        public async Task<IActionResult> GetRolesDetailsForDropdown()
+        {
+            CommonApiReponse apiReponse = new CommonApiReponse();
+            List<JobRoles> jobRolesList = await _jobRolesRepository.GetRolesDetailsForDropdown();
+            if (jobRolesList !=null)
+            {
+                apiReponse.statusCode = (int)HttpStatusCode.OK;
+                apiReponse.statusMessage = "Role Details Found...";
+                apiReponse.responseData = jobRolesList;
+            }
+            else
+            {
+                apiReponse.statusCode = (int)HttpStatusCode.NotFound;
+                apiReponse.statusMessage = "Role Details Not Found...";
+                apiReponse.responseData = null;
+            }
+            return Ok(apiReponse);
+        }
     }
 }

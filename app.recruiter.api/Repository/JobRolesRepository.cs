@@ -47,6 +47,24 @@ namespace app.recruiter.api.Repository
             throw new NotImplementedException();
         }
 
+        public async Task<List<JobRoles>> GetRolesDetailsForDropdown()
+        {
+            IMongoDatabase mongoDatabase = await _mongoDataContext.MongoDatabaseConnection();
+            IMongoCollection<JobRoles> mongoCollection = mongoDatabase.GetCollection<JobRoles>("Coll_JobRoles");
+
+            List<JobRoles> listData = (from roles in mongoCollection.AsQueryable()
+                                               where
+                                               roles.isDeleted == false
+                                               orderby roles.roleName ascending
+                                               select new JobRoles()
+                                               {
+                                                   id = roles.id,
+                                                   roleName = roles.roleName
+                                               }).ToList();
+            return listData;
+            throw new NotImplementedException();
+        }
+
         public async Task<long> UpdateJobRoles(JobRoles jobRoles)
         {
             IMongoDatabase mongoDatabase = await _mongoDataContext.MongoDatabaseConnection();
