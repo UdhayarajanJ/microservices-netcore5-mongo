@@ -39,6 +39,7 @@ namespace app.canditates.api
 
             //To Api Application Dependency
             services.AddTransient<ICanditateAccountRepository, CanditateAccountRepository>();
+            services.AddTransient<ICandidateApplyJobRepository, CandidateApplyJobRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

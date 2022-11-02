@@ -141,6 +141,11 @@ namespace app.canditates.api.Controllers
             }
             return Ok(apiReponse);
         }
+        /// <summary>
+        /// To Add The Information That Particular Candidate Details MongoDatabase [ NetCoreMicroservice ] Collection [ Coll_CandidateInformation ]
+        /// </summary>
+        /// <param name="candidateAccount"></param>
+        /// <returns></returns>
         [HttpPost(nameof(AddCandidateInformation))]
         public async Task<IActionResult> AddCandidateInformation([FromBody]CandidateAccount candidateAccount)
         {
@@ -160,6 +165,11 @@ namespace app.canditates.api.Controllers
             }
             return Ok(apiReponse);
         }
+        /// <summary>
+        /// To Update The Information That Particular Candidate Details MongoDatabase [ NetCoreMicroservice ] Collection [ Coll_CandidateInformation ]
+        /// </summary>
+        /// <param name="candidateAccount"></param>
+        /// <returns></returns>
         [HttpPut(nameof(UpdateCandidateInformation))]
         public async Task<IActionResult> UpdateCandidateInformation([FromBody] CandidateAccount candidateAccount)
         {
