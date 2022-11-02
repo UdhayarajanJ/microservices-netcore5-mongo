@@ -18,4 +18,10 @@ namespace app.utility.microservice.Models
         public object responseData2 { get; set; }
         public object responseData3 { get; set; }
     }
+    public class PaginationReponse
+    {
+        public int pageNo { get; set; }
+        public long totalCount { get; set; }
+        public int totalPage { get; set; }
+    }
 }

@@ -116,5 +116,31 @@ namespace app.recruiter.api.Controllers
             }
             return Ok(apiReponse);
         }
+        /// <summary>
+        /// To Get Roles Details Purpose Of View For Recruiter MongoDatabase [ NetCoreMicroservice ] Collection [ Coll_JobRoles ]
+        /// </summary>
+        /// <param name="pageNo"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
+        [HttpGet(nameof(GetRolesDetailsForView))]
+        public async Task<IActionResult> GetRolesDetailsForView([FromQuery]int pageNo, [FromQuery] int pageSize, [FromQuery] string searchValue)
+        {
+            CommonApiReponse apiReponse = new CommonApiReponse();
+            MulitpleApiResponse mulitpleApiResponse = await _jobRolesRepository.GetRolesDetailsForView(pageNo, pageSize, searchValue);
+            if (mulitpleApiResponse != null)
+            {
+                apiReponse.statusCode = (int)HttpStatusCode.OK;
+                apiReponse.statusMessage = "Role Details Found...";
+                apiReponse.responseData = mulitpleApiResponse;
+            }
+            else
+            {
+                apiReponse.statusCode = (int)HttpStatusCode.NotFound;
+                apiReponse.statusMessage = "Role Details Not Found...";
+                apiReponse.responseData = null;
+            }
+            return Ok(apiReponse);
+        }
     }
 }

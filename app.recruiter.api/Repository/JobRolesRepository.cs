@@ -1,6 +1,7 @@
 ﻿using app.recruiter.api.IRepository;
 using app.recruiter.api.Models;
 using app.utility.microservice.IRepository;
+using app.utility.microservice.Models;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -62,6 +63,58 @@ namespace app.recruiter.api.Repository
                                                    roleName = roles.roleName
                                                }).ToList();
             return listData;
+            throw new NotImplementedException();
+        }
+
+        public async Task<MulitpleApiResponse> GetRolesDetailsForView(int pageNo, int pageSize, string searchValue)
+        {
+            MulitpleApiResponse mulitpleApiResponse = new MulitpleApiResponse();
+            PaginationReponse paginationReponse = new PaginationReponse();
+
+            IMongoDatabase mongoDatabase = await _mongoDataContext.MongoDatabaseConnection();
+            IMongoCollection<JobRoles> mongoCollection = mongoDatabase.GetCollection<JobRoles>("Coll_JobRoles");
+
+            pageNo = pageNo == 0 ? 1 : pageNo;
+            pageSize = pageSize == 0 ? 10 : pageSize;
+            int offSetValue = (pageNo - 1) * pageSize;
+            searchValue = string.IsNullOrEmpty(searchValue) ? string.Empty : searchValue;
+
+            List<JobRoles> listData = (from roles in mongoCollection.AsQueryable()
+                                       where
+                                       roles.isDeleted == false &&
+                                       roles.roleName.Contains(searchValue)
+                                       orderby roles.documentObjectId descending
+                                       select new JobRoles()
+                                       { 
+                                           documentObjectId = roles.documentObjectId,
+                                           id = roles.id,
+                                           roleName = roles.roleName,
+                                           createdDate = roles.createdDate,
+                                           isDeleted = roles.isDeleted
+                                       }).Skip(offSetValue*pageSize).Take(pageSize).ToList();
+
+            List<JobRoles> totalCount = (from roles in mongoCollection.AsQueryable()
+                                       where
+                                       roles.isDeleted == false &&
+                                       roles.roleName.Contains(searchValue)
+                                       orderby roles.documentObjectId descending
+                                       select new JobRoles()
+                                       {
+                                           id = roles.id,
+                                       }).ToList();
+
+            paginationReponse.pageNo = pageNo;
+            paginationReponse.totalCount = totalCount.Count();
+
+            int lastPage = 0;
+            int pageCount = 0;
+            lastPage = (int)paginationReponse.totalCount % pageSize;
+            pageCount = (int)paginationReponse.totalCount / pageSize;
+            paginationReponse.totalPage = lastPage > 0 ? pageCount + 1 : pageCount;
+
+            mulitpleApiResponse.responseData1 = listData;
+            mulitpleApiResponse.responseData2 = paginationReponse;
+            return mulitpleApiResponse;
             throw new NotImplementedException();
         }
 
