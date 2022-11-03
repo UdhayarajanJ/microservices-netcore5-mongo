@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Ocelot.DependencyInjection;
+using Ocelot.Middleware;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +29,7 @@ namespace app.jobapi.gateway
         {
 
             services.AddControllers();
+            services.AddOcelot();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "app.jobapi.gateway", Version = "v1" });
@@ -51,6 +54,7 @@ namespace app.jobapi.gateway
             {
                 endpoints.MapControllers();
             });
+            app.UseOcelot().Wait();
         }
     }
 }

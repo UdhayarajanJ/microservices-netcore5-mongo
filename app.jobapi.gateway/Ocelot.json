@@ -1,0 +1,66 @@
+{
+  "Routes": [
+    //Candidate Routing Configuration 
+    //---- Start---------
+
+    {
+      "DownstreamPathTemplate": "/CanditateAccount/{ActionMethods}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 1374
+        }
+      ],
+      "UpstreamPathTemplate": "/CanditateAccount/{ActionMethods}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/CanditatesJob/{ActionMethods}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 1374
+        }
+      ],
+      "UpstreamPathTemplate": "/CanditatesJob/{ActionMethods}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "DELETE" ]
+    },
+
+    //-------End----------
+
+    //Recruiter Routing Configuration
+    //------Start---------
+
+    {
+      "DownstreamPathTemplate": "/JobPost/{ActionMethods}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 9629
+        }
+      ],
+      "UpstreamPathTemplate": "/JobPost/{ActionMethods}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/JobRole/{ActionMethods}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 9629
+        }
+      ],
+      "UpstreamPathTemplate": "/JobRole/{ActionMethods}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "DELETE" ]
+    }
+
+    //-------End----------
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:33746"
+  }
+}

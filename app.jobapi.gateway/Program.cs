@@ -21,6 +21,12 @@ namespace app.jobapi.gateway
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                })
+
+                //Adding Ocelot Configuration For Microservice
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    config.SetBasePath(hostingContext.HostingEnvironment.ContentRootPath).AddJsonFile("Ocelot.json", false, true);
                 });
     }
 }
