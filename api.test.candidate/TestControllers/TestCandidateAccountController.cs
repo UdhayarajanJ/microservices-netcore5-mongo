@@ -235,6 +235,10 @@ namespace api.test.candidate.TestControllers
             apiReponse.statusMessage.Should().BeEquivalentTo("Login Details Not Found...");
             apiReponse.responseData.Should().Be(loginResponse);
         }
+        /// <summary>
+        /// To Test The Candidate Information Saved And Should Test Case Passed
+        /// </summary>
+        /// <returns></returns>
         [Fact(DisplayName = "To_Test_AddCandidateInformation_ShouldBe_Saved")]
         [Trait("CandidateAccount", "To_Test_AddCandidateInformation_ShouldBe_Saved")]
         private async Task To_Test_AddCandidateInformation_ShouldBe_Saved()
@@ -257,6 +261,10 @@ namespace api.test.candidate.TestControllers
             apiReponse.statusMessage.Should().BeEquivalentTo("Candidate Details Saved...");
             apiReponse.responseData.Should().Be(result);
         }
+        /// <summary>
+        /// To Test The Candidate Information Not Saved And Should Test Case Failed
+        /// </summary>
+        /// <returns></returns>
         [Fact(DisplayName = "To_Test_AddCandidateInformation_ShouldNotBe_Saved")]
         [Trait("CandidateAccount", "To_Test_AddCandidateInformation_ShouldNotBe_Saved")]
         private async Task To_Test_AddCandidateInformation_ShouldNotBe_Saved()
@@ -279,6 +287,10 @@ namespace api.test.candidate.TestControllers
             apiReponse.statusMessage.Should().BeEquivalentTo("Candidate Details Not Saved...");
             apiReponse.responseData.Should().BeNull();
         }
+        /// <summary>
+        /// To Test The Candidate Information Updated And Should Test Case Passed
+        /// </summary>
+        /// <returns></returns>
         [Fact(DisplayName = "To_Test_UpdateCandidateInformation_ShouldBe_Update")]
         [Trait("CandidateAccount", "To_Test_UpdateCandidateInformation_ShouldBe_Update")]
         private async Task To_Test_UpdateCandidateInformation_ShouldBe_Update()
@@ -301,6 +313,10 @@ namespace api.test.candidate.TestControllers
             apiReponse.statusMessage.Should().BeEquivalentTo("Candidate Details Updated...");
             apiReponse.responseData.Should().Be(result);
         }
+        /// <summary>
+        /// To Test The Candidate Information Not Updated And Should Test Case Failed
+        /// </summary>
+        /// <returns></returns>
         [Fact(DisplayName = "To_Test_UpdateCandidateInformation_ShouldNotBe_Update")]
         [Trait("CandidateAccount", "To_Test_UpdateCandidateInformation_ShouldNotBe_Update")]
         private async Task To_Test_UpdateCandidateInformation_ShouldNotBe_Update()
